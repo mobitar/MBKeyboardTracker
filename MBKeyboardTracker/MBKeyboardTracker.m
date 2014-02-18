@@ -111,14 +111,7 @@
 
 + (void)beginTracking
 {
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[[self sharedInstance] textField] becomeFirstResponder];
-    });
-    });
+    [[[self sharedInstance] textField] becomeFirstResponder];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
