@@ -33,4 +33,4 @@ Delegate methods also available:
 	
 	
 ###Contact
-Mo Bitar - [email](me@bitar.io) or [tweet](http://twitter.com/bitario) me.
+Mo Bitar - [email](me@bitar.io) or [tweet](http://twitter.com/bitario) me for questions.
