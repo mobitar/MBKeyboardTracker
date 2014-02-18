@@ -7,13 +7,13 @@
 //
 
 #import "AppDelegate.h"
-#import "MBKeyboardRetriever.h"
+#import "MBKeyboardTracker.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [MBKeyboardRetriever retrieve];
+    [MBKeyboardTracker beginTracking];
     return YES;
 }
 

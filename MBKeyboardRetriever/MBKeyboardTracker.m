@@ -1,5 +1,5 @@
 //
-//  MBKeyboardRetriever.m
+//  MBKeyboardTracker.m
 //
 //  Created by Mo Bitar on 2/17/14.
 //  Copyright (c) 2014 progenius. All rights reserved.
@@ -19,9 +19,9 @@
 
 ////////////////////////////////////////////////////////////////////////////
 
-#import "MBKeyboardRetriever.h"
+#import "MBKeyboardTracker.h"
 
-@interface MBKeyboardRetriever () <UITextFieldDelegate, MBKeyboardInputViewDelegate>
+@interface MBKeyboardTracker () <UITextFieldDelegate, MBKeyboardInputViewDelegate>
 
 @property (nonatomic) UIView *keyboard;
 
@@ -31,7 +31,7 @@
 
 @end
 
-@implementation MBKeyboardRetriever
+@implementation MBKeyboardTracker
 
 + (UIView *)keyboard
 {
@@ -40,10 +40,10 @@
 
 + (instancetype)sharedInstance
 {
-    static MBKeyboardRetriever *instance = nil;
+    static MBKeyboardTracker *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [MBKeyboardRetriever new];
+        instance = [MBKeyboardTracker new];
     });
     return instance;
 }
@@ -83,33 +83,33 @@
 
 - (void)keyboardWillAppearNotification:(NSNotification *)notification
 {
-    if([self.delegate respondsToSelector:@selector(keyboardRetrieverKeyboardWillAppear:)]) {
-        [self.delegate keyboardRetrieverKeyboardWillAppear:self.keyboard];
+    if([self.delegate respondsToSelector:@selector(keyboardTrackerKeyboardWillAppear:)]) {
+        [self.delegate keyboardTrackerKeyboardWillAppear:self.keyboard];
     }
 }
 
 - (void)keyboardDidAppearNotification:(NSNotification *)notification
 {
-    if([self.delegate respondsToSelector:@selector(keyboardRetrieverKeyboardDidAppear:)]) {
-        [self.delegate keyboardRetrieverKeyboardDidAppear:self.keyboard];
+    if([self.delegate respondsToSelector:@selector(keyboardTrackerKeyboardDidAppear:)]) {
+        [self.delegate keyboardTrackerKeyboardDidAppear:self.keyboard];
     }
 }
 
 - (void)keyboardWillDisappearNotification:(NSNotification *)notification
 {
-    if([self.delegate respondsToSelector:@selector(keyboardRetrieverKeyboardWillDisappear:)]) {
-        [self.delegate keyboardRetrieverKeyboardWillDisappear:self.keyboard];
+    if([self.delegate respondsToSelector:@selector(keyboardTrackerKeyboardWillDisappear:)]) {
+        [self.delegate keyboardTrackerKeyboardWillDisappear:self.keyboard];
     }
 }
 
 - (void)keyboardDidDisappearNotification:(NSNotification *)notification
 {
-    if([self.delegate respondsToSelector:@selector(keyboardRetrieverKeyboardDidDisappear:)]) {
-        [self.delegate keyboardRetrieverKeyboardDidDisappear:self.keyboard];
+    if([self.delegate respondsToSelector:@selector(keyboardTrackerKeyboardDidDisappear:)]) {
+        [self.delegate keyboardTrackerKeyboardDidDisappear:self.keyboard];
     }
 }
 
-+ (void)retrieve
++ (void)beginTracking
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[[self sharedInstance] textField] becomeFirstResponder];
@@ -120,8 +120,8 @@
 {
     CGPoint origin = self.keyboard.frame.origin;
     
-    if([self.delegate respondsToSelector:@selector(keyboardRetrieverKeyboardOriginDidChange:)])
-        [self.delegate keyboardRetrieverKeyboardOriginDidChange:origin];
+    if([self.delegate respondsToSelector:@selector(keyboardTrackerKeyboardOriginDidChange:)])
+        [self.delegate keyboardTrackerKeyboardOriginDidChange:origin];
 }
 
 #pragma mark - MBKeyboardInputViewDelegate

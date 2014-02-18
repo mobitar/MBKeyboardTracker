@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "MBKeyboardRetriever.h"
+#import "MBKeyboardTracker.h"
 
-@interface ViewController () <MBKeyboardRetrieverDelegate>
+@interface ViewController () <MBKeyboardTrackerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @property (weak, nonatomic) IBOutlet UILabel *label;
@@ -21,7 +21,7 @@
 {
     [super viewDidLoad];
 	
-    [[MBKeyboardRetriever sharedInstance] setDelegate:self];
+    [[MBKeyboardTracker sharedInstance] setDelegate:self];
     
 }
 
@@ -37,7 +37,7 @@
 
 #pragma mark - Keyboard Retriever Delegate
 
-- (void)keyboardRetrieverKeyboardOriginDidChange:(CGPoint)origin
+- (void)keyboardTrackerKeyboardOriginDidChange:(CGPoint)origin
 {
     self.label.text = [NSString stringWithFormat:@"%.1f, %.1f", origin.x, origin.y];
 }

@@ -21,7 +21,7 @@
 		042C12EA18B3396900CF4C32 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042C12CC18B3396900CF4C32 /* UIKit.framework */; };
 		042C12F218B3396900CF4C32 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 042C12F018B3396900CF4C32 /* InfoPlist.strings */; };
 		042C12F418B3396900CF4C32 /* DemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C12F318B3396900CF4C32 /* DemoTests.m */; };
-		042C130018B339B900CF4C32 /* MBKeyboardRetriever.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C12FF18B339B900CF4C32 /* MBKeyboardRetriever.m */; };
+		042C130018B339B900CF4C32 /* MBKeyboardTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C12FF18B339B900CF4C32 /* MBKeyboardTracker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +54,8 @@
 		042C12EF18B3396900CF4C32 /* DemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoTests-Info.plist"; sourceTree = "<group>"; };
 		042C12F118B3396900CF4C32 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		042C12F318B3396900CF4C32 /* DemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoTests.m; sourceTree = "<group>"; };
-		042C12FE18B339B900CF4C32 /* MBKeyboardRetriever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBKeyboardRetriever.h; sourceTree = "<group>"; };
-		042C12FF18B339B900CF4C32 /* MBKeyboardRetriever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBKeyboardRetriever.m; sourceTree = "<group>"; };
+		042C12FE18B339B900CF4C32 /* MBKeyboardTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBKeyboardTracker.h; sourceTree = "<group>"; };
+		042C12FF18B339B900CF4C32 /* MBKeyboardTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBKeyboardTracker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,8 +159,8 @@
 		042C12FD18B339B900CF4C32 /* MBKeyboardRetriever */ = {
 			isa = PBXGroup;
 			children = (
-				042C12FE18B339B900CF4C32 /* MBKeyboardRetriever.h */,
-				042C12FF18B339B900CF4C32 /* MBKeyboardRetriever.m */,
+				042C12FE18B339B900CF4C32 /* MBKeyboardTracker.h */,
+				042C12FF18B339B900CF4C32 /* MBKeyboardTracker.m */,
 			);
 			name = MBKeyboardRetriever;
 			path = ../../MBKeyboardRetriever;
@@ -263,7 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				042C130018B339B900CF4C32 /* MBKeyboardRetriever.m in Sources */,
+				042C130018B339B900CF4C32 /* MBKeyboardTracker.m in Sources */,
 				042C12DF18B3396900CF4C32 /* ViewController.m in Sources */,
 				042C12D918B3396900CF4C32 /* AppDelegate.m in Sources */,
 				042C12D518B3396900CF4C32 /* main.m in Sources */,
@@ -475,6 +475,7 @@
 				042C12F918B3396900CF4C32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		042C12FA18B3396900CF4C32 /* Build configuration list for PBXNativeTarget "DemoTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +484,7 @@
 				042C12FC18B3396900CF4C32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
