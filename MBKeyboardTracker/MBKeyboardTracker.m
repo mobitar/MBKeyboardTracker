@@ -60,9 +60,8 @@
         self.inputView.delegate = self;
         self.textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         self.textField.inputAccessoryView = self.inputView;
-        self.textField.delegate = self;
         UIWindow *window = [[[UIApplication sharedApplication] windows] lastObject];
-        [window addSubview:self.textField];
+        [window insertSubview:self.textField atIndex:0];
         
         [self registerForNotifications];
     }
