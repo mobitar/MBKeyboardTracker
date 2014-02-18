@@ -111,8 +111,13 @@
 
 + (void)beginTracking
 {
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
     dispatch_async(dispatch_get_main_queue(), ^{
         [[[self sharedInstance] textField] becomeFirstResponder];
+    });
     });
 }
 
@@ -131,21 +136,19 @@
     if(superview) {
         
         self.keyboard = superview;
-        /* 
-         Quickly showing and hiding the keyboard during app launch causes a gray flash when the app first opens.
-         Hiding the keyboard temporarily avoids this issue. 
-         */
-        [self.keyboard setHidden:YES];
         [self.keyboard addObserver:self forKeyPath:@"frame" options:0 context:nil];
         
         NSLog(@"Sucessfully retreived keyboard: %@", self.keyboard);
-
-        [self.textField resignFirstResponder];
-        [self.textField removeFromSuperview];
-        self.textField = nil;
         
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        /*
+         Quickly showing and hiding the keyboard during app launch causes a gray flash when the app first opens.
+         Hiding the keyboard temporarily avoids this issue.
+         */
+        [self.keyboard setHidden:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.textField resignFirstResponder];
+            [self.textField removeFromSuperview];
+            self.textField = nil;
             [self.keyboard setHidden:NO];
         });
     }
