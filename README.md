@@ -1,4 +1,4 @@
-Easily subscribe to keyboard origin updates.
+Easily subscribe to keyboard origin updates and appearance updates.
 
 ![GIF](http://i.imgur.com/X1Poa3x.gif)
 
@@ -6,21 +6,20 @@ Easily subscribe to keyboard origin updates.
 
 In your AppDelegate's `application:didFinishLaunchingWithOptions:` method, do
 
-	[MBKeyboardRetriever retrieve];
+	[MBKeyboardTracker beginTracking];
 
 *after* window setup.
 
-Then, where ever you want, subscribe to `MBKeyboardRetriever`'s delegate method via:
+Then, where ever you want, subscribe to `MBKeyboardTracker`'s delegate method via:
 
-	[MBKeyboardRetriever sharedInstance] setDelegate:<object>];
+	[MBKeyboardTracker sharedInstance] setDelegate:<object>];
 
 and listen for 
 
-	- (void)keyboardRetrieverKeyboardOriginDidChange:(CGPoint)origin;
+	- (void)keyboardTrackerKeyboardOriginDidChange:(CGPoint)origin;
 
 See the demo project for an example.
 
-<br>
 
 Delegate methods also available:
 
