@@ -60,6 +60,7 @@
         self.inputView.delegate = self;
         self.textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         self.textField.inputAccessoryView = self.inputView;
+        
         UIWindow *window = [[[UIApplication sharedApplication] windows] lastObject];
         [window insertSubview:self.textField atIndex:0];
         
@@ -128,12 +129,25 @@
 - (void)keyboardInputViewWillMoveToSuperview:(UIView *)superview
 {
     if(superview) {
+        
         self.keyboard = superview;
-        NSLog(@"Sucessfully retreived keyboard: %@", self.keyboard);
+        /* 
+         Quickly showing and hiding the keyboard during app launch causes a gray flash when the app first opens.
+         Hiding the keyboard temporarily avoids this issue. 
+         */
+        [self.keyboard setHidden:YES];
         [self.keyboard addObserver:self forKeyPath:@"frame" options:0 context:nil];
+        
+        NSLog(@"Sucessfully retreived keyboard: %@", self.keyboard);
+
         [self.textField resignFirstResponder];
         [self.textField removeFromSuperview];
         self.textField = nil;
+        
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.keyboard setHidden:NO];
+        });
     }
 }
 
