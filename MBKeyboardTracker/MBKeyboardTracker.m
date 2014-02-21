@@ -29,6 +29,8 @@
 
 @property (nonatomic) MBKeyboardInputView *inputView;
 
+@property (nonatomic) NSMutableArray *delegates;
+
 @end
 
 @implementation MBKeyboardTracker
@@ -56,6 +58,9 @@
 - (instancetype)init
 {
     if(self = [super init]) {
+        
+        self.delegates = [NSMutableArray new];
+        
         self.inputView = [MBKeyboardInputView new];
         self.inputView.delegate = self;
         self.textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
@@ -81,31 +86,49 @@
                                                  name:UIKeyboardDidHideNotification object:nil];
 }
 
+- (void)addDelegate:(id<MBKeyboardTrackerDelegate>)delegate
+{
+    [self.delegates addObject:delegate];
+}
+
+- (void)removeDelegate:(id<MBKeyboardTrackerDelegate>)delegate
+{
+    [self.delegates addObject:delegate];
+}
+
 - (void)keyboardWillAppearNotification:(NSNotification *)notification
 {
-    if([self.delegate respondsToSelector:@selector(keyboardTrackerKeyboardWillAppear:)]) {
-        [self.delegate keyboardTrackerKeyboardWillAppear:self.keyboard];
+    for(id<MBKeyboardTrackerDelegate> delegate in self.delegates) {
+        if([delegate respondsToSelector:@selector(keyboardTrackerKeyboardWillAppear:)]) {
+            [delegate keyboardTrackerKeyboardWillAppear:self.keyboard];
+        }
     }
 }
 
 - (void)keyboardDidAppearNotification:(NSNotification *)notification
 {
-    if([self.delegate respondsToSelector:@selector(keyboardTrackerKeyboardDidAppear:)]) {
-        [self.delegate keyboardTrackerKeyboardDidAppear:self.keyboard];
+    for(id<MBKeyboardTrackerDelegate> delegate in self.delegates) {
+        if([delegate respondsToSelector:@selector(keyboardTrackerKeyboardDidAppear:)]) {
+            [delegate keyboardTrackerKeyboardDidAppear:self.keyboard];
+        }
     }
 }
 
 - (void)keyboardWillDisappearNotification:(NSNotification *)notification
 {
-    if([self.delegate respondsToSelector:@selector(keyboardTrackerKeyboardWillDisappear:)]) {
-        [self.delegate keyboardTrackerKeyboardWillDisappear:self.keyboard];
+    for(id<MBKeyboardTrackerDelegate> delegate in self.delegates) {
+        if([delegate respondsToSelector:@selector(keyboardTrackerKeyboardWillDisappear:)]) {
+            [delegate keyboardTrackerKeyboardWillDisappear:self.keyboard];
+        }
     }
 }
 
 - (void)keyboardDidDisappearNotification:(NSNotification *)notification
 {
-    if([self.delegate respondsToSelector:@selector(keyboardTrackerKeyboardDidDisappear:)]) {
-        [self.delegate keyboardTrackerKeyboardDidDisappear:self.keyboard];
+    for(id<MBKeyboardTrackerDelegate> delegate in self.delegates) {
+        if([delegate respondsToSelector:@selector(keyboardTrackerKeyboardDidDisappear:)]) {
+            [delegate keyboardTrackerKeyboardDidDisappear:self.keyboard];
+        }
     }
 }
 
@@ -118,8 +141,10 @@
 {
     CGPoint origin = self.keyboard.frame.origin;
     
-    if([self.delegate respondsToSelector:@selector(keyboardTrackerKeyboardOriginDidChange:)])
-        [self.delegate keyboardTrackerKeyboardOriginDidChange:origin];
+    for(id<MBKeyboardTrackerDelegate> delegate in self.delegates) {
+        if([delegate respondsToSelector:@selector(keyboardTrackerKeyboardOriginDidChange:)])
+            [delegate keyboardTrackerKeyboardOriginDidChange:origin];
+    }
 }
 
 #pragma mark - MBKeyboardInputViewDelegate
