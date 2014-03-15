@@ -25,7 +25,7 @@
 
 @interface MBKeyboardTracker : NSObject
 
-@property (nonatomic, weak) id<MBKeyboardTrackerDelegate> delegate;
+- (void)addDelegate:(id<MBKeyboardTrackerDelegate>)delegate;
 
 + (void)beginTracking;
 
