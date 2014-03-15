@@ -90,7 +90,8 @@
 
 - (void)addDelegate:(id<MBKeyboardTrackerDelegate>)delegate
 {
-    [self.delegates addObject:delegate];
+    MBWeakObject *weakObj = [MBWeakObject weakReferenceWithObject:delegate];
+    [self.delegates addObject:weakObj];
 }
 
 - (void)enumerateDelegatesWithBlock:(void(^)(id<MBKeyboardTrackerDelegate> delegate))block
