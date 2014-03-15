@@ -12,7 +12,7 @@ In your AppDelegate's `application:didFinishLaunchingWithOptions:` method, do
 
 Then, where ever you want, subscribe to `MBKeyboardTracker`'s delegate method via:
 
-	[MBKeyboardTracker sharedInstance] setDelegate:<object>];
+	[MBKeyboardTracker sharedInstance] addDelegate:id<MBKeyboardTrackerDelegate>];
 
 and listen for 
 
