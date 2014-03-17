@@ -25,12 +25,7 @@
 
 @interface MBKeyboardTracker : NSObject
 
-/**
- If you add a delegate, you MUST remove it after finishing.
- */
 - (void)addDelegate:(id<MBKeyboardTrackerDelegate>)delegate;
-
-- (void)removeDelegate:(id<MBKeyboardTrackerDelegate>)delegate;
 
 + (void)beginTracking;
 
