@@ -33,6 +33,8 @@
 
 @property (nonatomic) NSMutableArray *delegates;
 
+@property (nonatomic) BOOL ignoreKeyboardNotifications;
+
 @end
 
 @implementation MBKeyboardTracker
@@ -102,6 +104,10 @@
 }
 - (void)keyboardWillAppearNotification:(NSNotification *)notification
 {
+    if(self.ignoreKeyboardNotifications) {
+        return;
+    }
+    
     [self enumerateDelegatesWithBlock:^(id<MBKeyboardTrackerDelegate> delegate) {
         if([delegate respondsToSelector:@selector(keyboardTrackerKeyboardWillAppear:)]) {
             [delegate keyboardTrackerKeyboardWillAppear:self.keyboard];
@@ -111,6 +117,10 @@
 
 - (void)keyboardDidAppearNotification:(NSNotification *)notification
 {
+    if(self.ignoreKeyboardNotifications) {
+        return;
+    }
+    
     [self enumerateDelegatesWithBlock:^(id<MBKeyboardTrackerDelegate> delegate) {
         if([delegate respondsToSelector:@selector(keyboardTrackerKeyboardDidAppear:)]) {
             [delegate keyboardTrackerKeyboardDidAppear:self.keyboard];
@@ -120,6 +130,10 @@
 
 - (void)keyboardWillDisappearNotification:(NSNotification *)notification
 {
+    if(self.ignoreKeyboardNotifications) {
+        return;
+    }
+    
     [self enumerateDelegatesWithBlock:^(id<MBKeyboardTrackerDelegate> delegate) {
         if([delegate respondsToSelector:@selector(keyboardTrackerKeyboardWillDisappear:)]) {
             [delegate keyboardTrackerKeyboardWillDisappear:self.keyboard];
@@ -129,6 +143,10 @@
 
 - (void)keyboardDidDisappearNotification:(NSNotification *)notification
 {
+    if(self.ignoreKeyboardNotifications) {
+        return;
+    }
+    
     [self enumerateDelegatesWithBlock:^(id<MBKeyboardTrackerDelegate> delegate) {
         if([delegate respondsToSelector:@selector(keyboardTrackerKeyboardDidDisappear:)]) {
             [delegate keyboardTrackerKeyboardDidDisappear:self.keyboard];
@@ -138,11 +156,16 @@
 
 + (void)beginTracking
 {
+    [[self sharedInstance] setIgnoreKeyboardNotifications:YES];
     [[[self sharedInstance] textField] becomeFirstResponder];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    if(self.ignoreKeyboardNotifications) {
+        return;
+    }
+    
     CGPoint origin = self.keyboard.frame.origin;
     
     [self enumerateDelegatesWithBlock:^(id<MBKeyboardTrackerDelegate> delegate) {
@@ -172,6 +195,8 @@
             [self.textField removeFromSuperview];
             self.textField = nil;
             [self.keyboard setHidden:NO];
+            
+            self.ignoreKeyboardNotifications = NO;
         });
     }
 }
