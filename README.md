@@ -1,3 +1,5 @@
+(Update: This method no longer works in iOS 8)
+
 Easily subscribe to keyboard origin updates and appearance updates.
 
 ![GIF](http://i.imgur.com/X1Poa3x.gif)
